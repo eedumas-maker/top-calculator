@@ -6,6 +6,8 @@ let temp = null;
 
 let operator = null;
 
+const display = document.querySelector(".display");
+
 const num1 = document.querySelector("#one");
 const num2 = document.querySelector("#two");
 const num3 = document.querySelector("#three");
@@ -25,9 +27,15 @@ const divFunc = document.querySelector("#div");
 const clearFunc = document.querySelector("#clear");
 const equalsFunc = document.querySelector("#equals");
 
-num1.addEventListener('click', (event) => {console.log(event)});
+// Let's add some functions!
 
+// when number is pressed, it's added to display value from right to left (so hitting 1 when 10 is displayed, displays 101)
+const numClick = function(a){
+    displayNum = displayNum + `${a}`;
+    return display.textContent = `${displayNum}`;
+};
 
+// function to run operations (ideally when Equals is pressed)
 const operate = function(operator,a,b){
     if (operator == "add"){
         return add(a,b);
@@ -69,3 +77,7 @@ const clear = function(){
     operator = null;
 }
 
+// let's add all the listners at the end!
+num1.addEventListener('click', () => numClick(1));
+num2.addEventListener('click', () => numClick(2));
+num3.addEventListener('click', () => numClick(3));
