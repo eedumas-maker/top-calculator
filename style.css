@@ -3,6 +3,9 @@ body{
     justify-content: center;
     align-items: center;
 }
+button{
+    font-size: 24pt;
+}
 
 .container{
     display: flex;
@@ -20,7 +23,8 @@ body{
     
     display: flex;
     align-items: center;
-    font-size: 36pt;
+    font-size: 48pt;
+    font-family: sans-serif;
 }
 
 .num,
