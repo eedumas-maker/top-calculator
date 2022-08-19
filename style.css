@@ -5,6 +5,8 @@ body{
 }
 button{
     font-size: 24pt;
+    min-width: 25%;
+    min-height: 10%;
 }
 
 .container{
@@ -27,16 +29,4 @@ button{
     font-family: sans-serif;
 }
 
-.num,
-.func{
-    
-    min-width: 100px;
-    min-height: 60px;
-}
 
-.clear,
-.equals {
-    
-    flex-grow: 1;
-    min-height: 60px;
-}
