@@ -1,7 +1,6 @@
 let displayNum = "";
 
-let firstNum = null;
-let secondNum = null;
+let previousNum = null;
 
 let operator = null;
 let operatorJustSet = false;
@@ -38,7 +37,7 @@ const equalsFunc = document.querySelector("#equals");
 */
 const numClick = function(a){
     console.log("operator: "+operator);
-    console.log("firstNum: "+firstNum);
+    console.log("previousNum: "+previousNum);
     console.log("operatorJustSet: "+operatorJustSet);
 
     // locks display if over 10 digits long
@@ -65,10 +64,10 @@ const numClick = function(a){
 
 const operatorClick = function(op){
 
-    firstNum = Number(displayNum);
+    previousNum = Number(displayNum);
     operatorJustSet = true;
 
-    console.log("firstNum: "+firstNum);
+    console.log("previousNum: "+previousNum);
     console.log("operator: "+op);
 
     switch(op){
@@ -88,18 +87,28 @@ const operatorClick = function(op){
 };
 
 const equalsClick = function(){
+    console.log("operator: "+operator);
+    console.log("previousNum: "+previousNum);
+    console.log("displayNum: "+displayNum);
 
+    displayNum = operate(operator,previousNum,displayNum);
+    
+
+    return display.textContent = `${displayNum}`;
 }
 
 // function to run operations (ideally when Equals is pressed)
 const operate = function(operator,a,b){
+    a = Number(a);
+    b = Number(b);
+    
     if (operator == "add"){
         return add(a,b);
-    } else if (operator == "subtract") {
+    } else if (operator == "sub") {
         return subtract(a,b);
-    } else if (operator == "multiply") {
+    } else if (operator == "mult") {
         return multiply(a,b);
-    } else if (operator == "divide") {
+    } else if (operator == "div") {
         return divide(a,b);
     }
 };
@@ -147,7 +156,7 @@ num9.addEventListener('click', () => numClick(9));
 num0.addEventListener('click', () => numClick(0));
 
 clearFunc.addEventListener('click', () => clear());
-// put in equals in a moment
+equalsFunc.addEventListener('click', () => equalsClick());
 
 // now the operator buttons
 addFunc.addEventListener('click', () => operatorClick("add"))
