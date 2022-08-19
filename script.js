@@ -1,9 +1,11 @@
 let displayNum = "";
+let solution = 0;
 
 let previousNum = null;
 
 let operator = null;
 let operatorJustSet = false;
+
 
 const display = document.querySelector(".display");
 
@@ -87,18 +89,19 @@ const operatorClick = function(op){
 };
 
 const equalsClick = function(){
+
     console.log("operator: "+operator);
     console.log("previousNum: "+previousNum);
     console.log("displayNum: "+displayNum);
 
-    displayNum = operate(operator,previousNum,displayNum);
+    previousNum = operate(operator,previousNum,displayNum);
     
-
-    return display.textContent = `${displayNum}`;
+    return display.textContent = `${previousNum}`;
 }
 
 // function to run operations (ideally when Equals is pressed)
 const operate = function(operator,a,b){
+    // put in 
     a = Number(a);
     b = Number(b);
     
@@ -128,7 +131,7 @@ const multiply = function(a,b) {
 
 const divide = function(a,b){
     if(b == 0){
-        return "Err: Divide by Zero"
+        return "No Div by 0";
     }
     return Math.round((a / b)*10)/10;
 };
@@ -163,8 +166,6 @@ addFunc.addEventListener('click', () => operatorClick("add"))
 subFunc.addEventListener('click', () => operatorClick("sub"))
 multFunc.addEventListener('click', () => operatorClick("mult"))
 divFunc.addEventListener('click', () => operatorClick("div"))
-
-
 
 
 
