@@ -37,6 +37,9 @@ const equalsFunc = document.querySelector("#equals");
 3. display has a number and an operator has just been pressed -> clear display put prior number in storage (actually, set that in Operator)
 */
 const numClick = function(a){
+    console.log("operator: "+operator);
+    console.log("firstNum: "+firstNum);
+    console.log("operatorJustSet: "+operatorJustSet);
 
     // locks display if over 10 digits long
     if(displayNum.length >= 10){
@@ -47,18 +50,26 @@ const numClick = function(a){
     // if they just set an operator, clear the display first
     if(operator !== null && operatorJustSet === true){
         displayNum = "";  // reset the Display
+        displayNum = `${a}`; // now make it that first number pressed
+        operatorJustSet = false; // reset it
+
+        console.log("displayNum: "+displayNum);
         return display.textContent = `${displayNum}`;
     }
 
     displayNum = displayNum + `${a}`;
 
     return display.textContent = `${displayNum}`;
+    console.log(displayNum);
 };
 
-const operatorClick = function(a){
+const operatorClick = function(op){
 
     firstNum = Number(displayNum);
     operatorJustSet = true;
+
+    console.log("firstNum: "+firstNum);
+    console.log("operator: "+op);
 
     switch(op){
         case "add":
@@ -74,11 +85,11 @@ const operatorClick = function(a){
             return operator = "div";
             break;
     };
-
-    console.log("firstNum: "+firstNum);
-    console.log("operator: "+operator);
-
 };
+
+const equalsClick = function(){
+
+}
 
 // function to run operations (ideally when Equals is pressed)
 const operate = function(operator,a,b){
