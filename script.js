@@ -2,6 +2,8 @@ let displayNum = "";
 let solution = 0;
 
 let previousNum = null;
+let equalsNum = null;
+let equalsAgain = false;
 
 let operator = null;
 let operatorJustSet = false;
@@ -38,9 +40,9 @@ const equalsFunc = document.querySelector("#equals");
 3. display has a number and an operator has just been pressed -> clear display put prior number in storage (actually, set that in Operator)
 */
 const numClick = function(a){
-    console.log("operator: "+operator);
-    console.log("previousNum: "+previousNum);
-    console.log("operatorJustSet: "+operatorJustSet);
+    // console.log("operator: "+operator);
+    // console.log("previousNum: "+previousNum);
+    // console.log("operatorJustSet: "+operatorJustSet);
 
     // locks display if over 10 digits long
     if(displayNum.length >= 10){
@@ -54,7 +56,6 @@ const numClick = function(a){
         displayNum = `${a}`; // now make it that first number pressed
         operatorJustSet = false; // reset it
 
-        console.log("displayNum: "+displayNum);
         return display.textContent = `${displayNum}`;
     }
 
@@ -66,11 +67,11 @@ const numClick = function(a){
 
 const operatorClick = function(op){
 
-    previousNum = Number(displayNum);
+    if (previousNum == null){
+        previousNum = Number(displayNum);
+    }
+    equalsAgain = false;
     operatorJustSet = true;
-
-    console.log("previousNum: "+previousNum);
-    console.log("operator: "+op);
 
     switch(op){
         case "add":
@@ -90,13 +91,27 @@ const operatorClick = function(op){
 
 const equalsClick = function(){
 
+
+
+    if(equalsAgain == false){
+        equalsNum = displayNum;
+        displayNum = operate(operator,previousNum,displayNum);
+        equalsAgain = true;
+    }
+    else {
+        displayNum = operate(operator,equalsNum,displayNum);
+    }
+    
     console.log("operator: "+operator);
     console.log("previousNum: "+previousNum);
     console.log("displayNum: "+displayNum);
+    console.log("equalsAgain: "+equalsAgain);
+    console.log("equalsNum: "+equalsNum);
 
-    previousNum = operate(operator,previousNum,displayNum);
-    
-    return display.textContent = `${previousNum}`;
+    return display.textContent = `${displayNum}`;
+
+
+
 }
 
 // function to run operations (ideally when Equals is pressed)
